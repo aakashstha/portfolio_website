@@ -283,7 +283,7 @@ class HomePage extends StatelessWidget {
           child: customText(
             "Technologies",
             fontSize: 40,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w600,
             color: AppColors.lightBlack,
           ),
         ),
@@ -315,7 +315,7 @@ class HomePage extends StatelessWidget {
           child: customText(
             "About Me",
             fontSize: 40,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w600,
             color: AppColors.lightBlack,
           ),
         ),

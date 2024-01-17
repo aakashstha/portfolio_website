@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Aakash Shrestha',
       theme: ThemeData(
+        primaryColor: AppColors.white,
         splashColor: AppColors.transparent,
         hoverColor: AppColors.transparent,
         highlightColor: AppColors.transparent,

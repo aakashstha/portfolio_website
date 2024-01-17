@@ -9,7 +9,7 @@ import 'package:portfolio_website/widgets/custom_text.dart';
 import 'package:portfolio_website/widgets/header.dart';
 
 class IndividualProjectPage extends StatefulWidget {
-  const IndividualProjectPage({Key? key}) : super(key: key);
+  const IndividualProjectPage({super.key});
 
   @override
   State<IndividualProjectPage> createState() => _IndividualProjectPageState();
