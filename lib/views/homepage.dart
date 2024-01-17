@@ -295,10 +295,10 @@ class HomePage extends StatelessWidget {
           runSpacing: 30,
           alignment: WrapAlignment.center,
           children: [
+            _buildTechIcon(ImageConstant.svgFigma, "Figma"),
             _buildTechIcon(ImageConstant.svgVscode, "VS Code"),
             _buildTechIcon(ImageConstant.svgXcode, "Xcode"),
             _buildTechIcon(ImageConstant.svgGit, "Git"),
-            _buildTechIcon(ImageConstant.svgFigma, "Figma"),
           ],
         ),
       ],
