@@ -14,10 +14,12 @@ class AppRoutes {
     GetPage(
       name: initialRoute,
       page: () => HomePage(),
+      transition: Transition.noTransition,
     ),
     GetPage(
       name: individualProjectRoute,
       page: () => const IndividualProjectPage(),
+      transition: Transition.noTransition,
     ),
 
     // GetPage(
