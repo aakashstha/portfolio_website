@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:portfolio_website/constants/color_constants.dart';
+import 'package:portfolio_website/controller/homepage_controller.dart';
 import 'package:portfolio_website/routes/app_routes.dart';
 
+final HomepageController homepageController = Get.put(HomepageController());
 void main() async {
-  await GetStorage.init();
+  homepageController.initializeGetStorage();
+
   runApp(const MyApp());
 }
 

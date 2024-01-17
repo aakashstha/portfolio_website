@@ -5,6 +5,10 @@ import 'package:portfolio_website/model/worked_project_generator.dart';
 class HomepageController extends GetxController {
   final individualProjectId = GetStorage();
 
+  Future<void> initializeGetStorage() async {
+    await GetStorage.init();
+  }
+
   void writeIndividualProjectId(int projectId) {
     individualProjectId.write('individualProjectId', projectId);
   }
