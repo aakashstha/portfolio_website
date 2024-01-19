@@ -25,3 +25,27 @@ Widget customText(
     ),
   );
 }
+
+Widget selectableCustomText(
+  String text, {
+  double fontSize = 14,
+  Color color = AppColors.black,
+  FontWeight fontWeight = FontWeight.normal,
+  double letterSpacing = 0,
+  double tetextScalerValue = 1,
+  TextDecoration textDecoration = TextDecoration.none,
+  TextAlign textAlign = TextAlign.center,
+}) {
+  return SelectableText(
+    text,
+    textAlign: textAlign,
+    textScaler: TextScaler.linear(tetextScalerValue),
+    style: GoogleFonts.inter(
+      letterSpacing: letterSpacing,
+      fontSize: fontSize,
+      color: color,
+      fontWeight: fontWeight,
+      decoration: textDecoration,
+    ),
+  );
+}

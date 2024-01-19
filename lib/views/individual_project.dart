@@ -143,7 +143,7 @@ class _IndividualProjectPageState extends State<IndividualProjectPage> {
         children: [
           for (var i = 0; i < individualProject.listofScreenshot.length; i++)
             Image.asset(
-              'assets/images/${individualProject.listofScreenshot[i]}',
+              'assets/images/${individualProject.screenshotFolderName}/${individualProject.listofScreenshot[i]}',
               height: screenWidth < 500 ? 400 : 600,
             ),
         ],

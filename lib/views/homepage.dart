@@ -3,50 +3,97 @@ import 'package:get/get.dart';
 import 'package:portfolio_website/constants/color_constants.dart';
 import 'package:portfolio_website/constants/image_constants.dart';
 import 'package:portfolio_website/controller/homepage_controller.dart';
+import 'package:portfolio_website/model/individual_project_generator.dart';
+import 'package:portfolio_website/model/individual_project_model.dart';
 import 'package:portfolio_website/model/worked_project_generator.dart';
 import 'package:portfolio_website/model/worked_project_model.dart';
 import 'package:portfolio_website/routes/app_routes.dart';
 import 'package:portfolio_website/widgets/build_svg.dart';
 import 'package:portfolio_website/widgets/custom_text.dart';
 import 'package:portfolio_website/widgets/header.dart';
+import 'package:scrolls_to_top/scrolls_to_top.dart';
 
-class HomePage extends StatelessWidget {
-  HomePage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
-  final HomepageController homepageController = Get.put(HomepageController());
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final HomepageController _homepageController = Get.put(HomepageController());
+  late List<IndividualProject> _allIndividualProject;
+  late List<WorkedProject> _allWorkedProject;
   late double screenWidth;
 
+  @override
+  void didChangeDependencies() {
+    // For Caching all Worked Projects App Icons Images in a home page for instantly viewing images.
+    _allWorkedProject = WorkedProjectGenerator.generateWorkedProject();
+    for (var i = 0; i < _allWorkedProject.length; i++) {
+      String appIconImageName = _allWorkedProject[i].appIconImageName;
+
+      _homepageController.cachedAllWorkdedProjectImage(
+          appIconImageName, context);
+    }
+
+    // For Caching all individual Projects Images in a home page for instantly viewing images.
+    _allIndividualProject = IndividualProjectGenerator.generateWorkedProject();
+    for (var i = 0; i < _allIndividualProject.length; i++) {
+      String folderName = _allIndividualProject[i].screenshotFolderName;
+      List<String> imageList = _allIndividualProject[i].listofScreenshot;
+
+      _homepageController.cachedAllIndividualAssetImage(
+          folderName, imageList, context);
+    }
+
+    super.didChangeDependencies();
+  }
+
+  final _scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
     screenWidth = MediaQuery.of(context).size.width;
 
-    return Scaffold(
-      backgroundColor: AppColors.white,
-      body: SafeArea(
-        child: ListView(
-          children: [
-            const SizedBox(height: 60),
-            buildHeader(),
+    return ScrollsToTop(
+      onScrollsToTop: (event) async {
+        await _scrollController.animateTo(
+          event.to,
+          duration: event.duration,
+          curve: event.curve,
+        );
+      },
+      child: Scaffold(
+        backgroundColor: AppColors.white,
+        body: SafeArea(
+          child: ListView(
+            primary: false,
+            controller: ScrollController(),
+            physics: const BouncingScrollPhysics(),
+            children: [
+              const SizedBox(height: 60),
+              buildHeader(),
 
-            // My Best Recent Projects
-            const SizedBox(height: 120),
-            _buildBestProjects(),
+              // My Best Recent Projects
+              const SizedBox(height: 120),
+              _buildBestProjects(),
 
-            // Bio and FrameWork
-            const SizedBox(height: 60),
-            _buildBioAndFramework(),
+              // Bio and FrameWork
+              const SizedBox(height: 60),
+              _buildBioAndFramework(),
 
-            // Programming Languages and Technologies
-            const SizedBox(height: 80),
-            _buildProgLangAndTech(),
+              // Programming Languages and Technologies
+              const SizedBox(height: 80),
+              _buildProgLangAndTech(),
 
-            // About Me
-            const SizedBox(height: 80),
-            _buildAboutMe(),
+              // About Me
+              const SizedBox(height: 80),
+              _buildAboutMe(),
 
-            // Bottom white space
-            const SizedBox(height: 60),
-          ],
+              // Bottom white space
+              const SizedBox(height: 60),
+            ],
+          ),
         ),
       ),
     );
@@ -383,9 +430,10 @@ class HomePage extends StatelessWidget {
                       textDecoration: TextDecoration.underline,
                     ),
                     const Spacer(),
-                    customText("contactaakash10@gmail.com", fontSize: 18),
-                    customText("+9779869266662", fontSize: 18),
-                    customText("Bhaktapur, Nepal", fontSize: 18),
+                    selectableCustomText("contactaakash10@gmail.com",
+                        fontSize: 18),
+                    selectableCustomText("+9779869266662", fontSize: 18),
+                    selectableCustomText("Bhaktapur, Nepal", fontSize: 18),
                     const Spacer(),
                     const SizedBox(height: 30),
                   ],

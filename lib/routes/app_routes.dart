@@ -13,7 +13,7 @@ class AppRoutes {
   static List<GetPage> pages = [
     GetPage(
       name: initialRoute,
-      page: () => HomePage(),
+      page: () => const HomePage(),
       transition: Transition.noTransition,
     ),
     GetPage(

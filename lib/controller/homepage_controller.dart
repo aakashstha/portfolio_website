@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:portfolio_website/model/worked_project_generator.dart';
@@ -30,5 +31,29 @@ class HomepageController extends GetxController {
 
   void handleProjectIconHover(int projectIndex, int iconIndex, double scale) {
     insideProjectsIconScale[projectIndex][iconIndex] = scale;
+  }
+
+  Future<void> cachedAllIndividualAssetImage(
+      String imageFolderName, List imageList, BuildContext context) async {
+    for (var i = 0; i < imageList.length; i++) {
+      try {
+        await precacheImage(
+            AssetImage("assets/images/$imageFolderName/${imageList[i]}"),
+            context);
+        print('Image loaded and cached successfully!');
+      } catch (e) {
+        print('Failed to load and cache the image: $e');
+      }
+    }
+  }
+
+  Future<void> cachedAllWorkdedProjectImage(
+      String imageName, BuildContext context) async {
+    try {
+      await precacheImage(AssetImage("assets/images/$imageName"), context);
+      print('Image loaded and cached successfully!');
+    } catch (e) {
+      print('Failed to load and cache the image: $e');
+    }
   }
 }

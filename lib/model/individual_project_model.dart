@@ -12,6 +12,7 @@ class IndividualProject {
   final String githubIcon;
   final LaunchAppsProjectURL? githubProjectLink;
   final List<String> listofScreenshot;
+  final String screenshotFolderName;
   final String aboutTheProject;
   final String techStack;
 
@@ -27,6 +28,7 @@ class IndividualProject {
     required this.githubIcon,
     required this.githubProjectLink,
     required this.listofScreenshot,
+    required this.screenshotFolderName,
     required this.aboutTheProject,
     required this.techStack,
   });

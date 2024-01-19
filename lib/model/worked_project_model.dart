@@ -6,6 +6,7 @@ class WorkedProject {
   final String image;
   final String projectName;
   final String projectSubTitle;
+  final String appIconImageName;
   final String iosIcon;
   final String androidIcon;
   final String githubIcon;
@@ -20,6 +21,7 @@ class WorkedProject {
     required this.image,
     required this.projectName,
     required this.projectSubTitle,
+    required this.appIconImageName,
     required this.iosIcon,
     required this.androidIcon,
     required this.githubIcon,

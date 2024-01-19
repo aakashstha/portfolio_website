@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/route_manager.dart';
 import 'package:portfolio_website/constants/color_constants.dart';
 import 'package:portfolio_website/controller/homepage_controller.dart';
 import 'package:portfolio_website/routes/app_routes.dart';
@@ -20,13 +19,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Aakash Shrestha',
+      title: 'Aakash Shrestha: Mobile Developer',
       theme: ThemeData(
         primaryColor: AppColors.white,
         splashColor: AppColors.transparent,
         hoverColor: AppColors.transparent,
         highlightColor: AppColors.transparent,
         useMaterial3: true,
+        textSelectionTheme: const TextSelectionThemeData(
+          selectionColor: AppColors.selectionColor,
+        ),
       ),
       initialRoute: AppRoutes.initialRoute,
       getPages: AppRoutes.pages,
