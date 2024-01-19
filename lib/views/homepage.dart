@@ -28,25 +28,31 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void didChangeDependencies() {
-    // For Caching all Worked Projects App Icons Images in a home page for instantly viewing images.
-    _allWorkedProject = WorkedProjectGenerator.generateWorkedProject();
-    for (var i = 0; i < _allWorkedProject.length; i++) {
-      String appIconImageName = _allWorkedProject[i].appIconImageName;
+    _homepageController.writeImageCached(false);
 
-      _homepageController.cachedAllWorkdedProjectImage(
-          appIconImageName, context);
+    if (!_homepageController.readImageCached()) {
+      // For Caching all Worked Projects App Icons Images in a home page for instantly viewing images.
+      _allWorkedProject = WorkedProjectGenerator.generateWorkedProject();
+      for (var i = 0; i < _allWorkedProject.length; i++) {
+        String appIconImageName = _allWorkedProject[i].appIconImageName;
+
+        _homepageController.cachedAllWorkdedProjectImage(
+            appIconImageName, context);
+      }
+
+      // For Caching all individual Projects Images in a home page for instantly viewing images.
+      _allIndividualProject =
+          IndividualProjectGenerator.generateWorkedProject();
+      for (var i = 0; i < _allIndividualProject.length; i++) {
+        String folderName = _allIndividualProject[i].screenshotFolderName;
+        List<String> imageList = _allIndividualProject[i].listofScreenshot;
+
+        _homepageController.cachedAllIndividualAssetImage(
+            folderName, imageList, context);
+      }
+
+      _homepageController.writeImageCached(true);
     }
-
-    // For Caching all individual Projects Images in a home page for instantly viewing images.
-    _allIndividualProject = IndividualProjectGenerator.generateWorkedProject();
-    for (var i = 0; i < _allIndividualProject.length; i++) {
-      String folderName = _allIndividualProject[i].screenshotFolderName;
-      List<String> imageList = _allIndividualProject[i].listofScreenshot;
-
-      _homepageController.cachedAllIndividualAssetImage(
-          folderName, imageList, context);
-    }
-
     super.didChangeDependencies();
   }
 

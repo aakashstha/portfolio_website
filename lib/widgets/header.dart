@@ -11,7 +11,8 @@ Widget buildHeader() {
     children: [
       InkWell(
         onTap: () {
-          Get.offAllNamed(AppRoutes.initialRoute);
+          Get.back();
+          // Get.offAllNamed(AppRoutes.initialRoute);
         },
         child: Column(
           children: [

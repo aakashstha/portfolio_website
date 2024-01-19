@@ -4,18 +4,26 @@ import 'package:get_storage/get_storage.dart';
 import 'package:portfolio_website/model/worked_project_generator.dart';
 
 class HomepageController extends GetxController {
-  final individualProjectId = GetStorage();
+  final getXStorage = GetStorage();
 
   Future<void> initializeGetStorage() async {
     await GetStorage.init();
   }
 
   void writeIndividualProjectId(int projectId) {
-    individualProjectId.write('individualProjectId', projectId);
+    getXStorage.write('individualProjectId', projectId);
   }
 
   int readIndividualProjectId() {
-    return individualProjectId.read('individualProjectId');
+    return getXStorage.read('individualProjectId');
+  }
+
+  void writeImageCached(bool projectId) {
+    getXStorage.write('imageCached', projectId);
+  }
+
+  bool readImageCached() {
+    return getXStorage.read('imageCached');
   }
 
   RxList<double> headerSocialScale = List.generate(4, (index) => 1.0).obs;
