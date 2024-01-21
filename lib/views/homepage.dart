@@ -98,34 +98,39 @@ class _HomePageState extends State<HomePage> {
               },
               child: Scaffold(
                 backgroundColor: AppColors.white,
-                body: SafeArea(
-                  child: ListView(
-                    primary: false,
-                    controller: ScrollController(),
-                    physics: const BouncingScrollPhysics(),
-                    children: [
-                      const SizedBox(height: 60),
-                      buildHeader(),
+                body: RefreshIndicator(
+                  onRefresh: () async {
+                    // await Future.delayed(const Duration(seconds: 1));
+                  },
+                  child: SafeArea(
+                    child: ListView(
+                      primary: false,
+                      controller: ScrollController(),
+                      physics: const BouncingScrollPhysics(),
+                      children: [
+                        const SizedBox(height: 60),
+                        buildHeader(),
 
-                      // My Best Recent Projects
-                      const SizedBox(height: 120),
-                      _buildBestProjects(),
+                        // My Best Recent Projects
+                        const SizedBox(height: 120),
+                        _buildBestProjects(),
 
-                      // Bio and FrameWork
-                      const SizedBox(height: 60),
-                      _buildBioAndFramework(),
+                        // Bio and FrameWork
+                        const SizedBox(height: 60),
+                        _buildBioAndFramework(),
 
-                      // Programming Languages and Technologies
-                      const SizedBox(height: 80),
-                      _buildProgLangAndTech(),
+                        // Programming Languages and Technologies
+                        const SizedBox(height: 80),
+                        _buildProgLangAndTech(),
 
-                      // About Me
-                      const SizedBox(height: 80),
-                      _buildAboutMe(),
+                        // About Me
+                        const SizedBox(height: 80),
+                        _buildAboutMe(),
 
-                      // Bottom white space
-                      const SizedBox(height: 60),
-                    ],
+                        // Bottom white space
+                        const SizedBox(height: 60),
+                      ],
+                    ),
                   ),
                 ),
               ),

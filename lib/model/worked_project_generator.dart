@@ -17,7 +17,7 @@ class WorkedProjectGenerator {
         iosIcon: ImageConstant.svgIos,
         androidIcon: ImageConstant.svgAndroid,
         githubIcon: ImageConstant.svgGithub,
-        appIconSize: const Size(290, 132),
+        appIconSize: const Size(244, 132),
         appIconBackgroundColor: AppColors.white,
         iosAppLink: LaunchAppsProjectURL.iosLinkPerr,
         androidAppLink: LaunchAppsProjectURL.androidLinkPerr,

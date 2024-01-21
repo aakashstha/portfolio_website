@@ -31,7 +31,6 @@ class ImageConstant {
 
   // PNG, JPG Images
   static String imgAppIconPerr = '$imagePath/app_icon_perr.png';
-  static String imgAppIconPerr2 = '$imagePath/app_icon_perr2.png';
   static String imgAppIconTechnicalTalent =
       '$imagePath/app_icon_technical_talent.png';
   static String imgAppIconRayy = '$imagePath/app_icon_rayy.png';

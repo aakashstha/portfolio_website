@@ -8,7 +8,7 @@ class IndividualProjectGenerator {
     return [
       IndividualProject(
         id: 1,
-        image: ImageConstant.imgAppIconPerr2,
+        image: ImageConstant.imgAppIconPerr,
         projectName: "Perr",
         projectSubTitle: "Flutter | Firebase",
         iosIcon: ImageConstant.svgIos,
