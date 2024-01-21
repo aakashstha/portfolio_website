@@ -24,7 +24,27 @@ class _HomePageState extends State<HomePage> {
   final HomepageController _homepageController = Get.put(HomepageController());
   late List<IndividualProject> _allIndividualProject;
   late List<WorkedProject> _allWorkedProject;
+  List<Image> allWorkedAppIconImages = [];
   late double screenWidth;
+
+  @override
+  void initState() {
+    _allWorkedProject = WorkedProjectGenerator.generateWorkedProject();
+
+    for (var element in _allWorkedProject) {
+      allWorkedAppIconImages.add(
+        Image.asset(
+          element.image,
+          fit: BoxFit.fitWidth,
+          width: element.appIconSize.width,
+          height: element.appIconSize.height,
+        ),
+      );
+    }
+
+    _homepageController.delayForLoadingImagesAtFirst();
+    super.initState();
+  }
 
   @override
   void didChangeDependencies() {
@@ -32,7 +52,6 @@ class _HomePageState extends State<HomePage> {
 
     if (!_homepageController.readImageCached()) {
       // For Caching all Worked Projects App Icons Images in a home page for instantly viewing images.
-      _allWorkedProject = WorkedProjectGenerator.generateWorkedProject();
       for (var i = 0; i < _allWorkedProject.length; i++) {
         String appIconImageName = _allWorkedProject[i].appIconImageName;
 
@@ -61,47 +80,56 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     screenWidth = MediaQuery.of(context).size.width;
 
-    return ScrollsToTop(
-      onScrollsToTop: (event) async {
-        await _scrollController.animateTo(
-          event.to,
-          duration: event.duration,
-          curve: event.curve,
-        );
-      },
-      child: Scaffold(
-        backgroundColor: AppColors.white,
-        body: SafeArea(
-          child: ListView(
-            primary: false,
-            controller: ScrollController(),
-            physics: const BouncingScrollPhysics(),
-            children: [
-              const SizedBox(height: 60),
-              buildHeader(),
+    return Obx(
+      () => _homepageController.isLoadingAtFirst.value
+          ? const Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [CircularProgressIndicator()],
+              ),
+            )
+          : ScrollsToTop(
+              onScrollsToTop: (event) async {
+                await _scrollController.animateTo(
+                  event.to,
+                  duration: event.duration,
+                  curve: event.curve,
+                );
+              },
+              child: Scaffold(
+                backgroundColor: AppColors.white,
+                body: SafeArea(
+                  child: ListView(
+                    primary: false,
+                    controller: ScrollController(),
+                    physics: const BouncingScrollPhysics(),
+                    children: [
+                      const SizedBox(height: 60),
+                      buildHeader(),
 
-              // My Best Recent Projects
-              const SizedBox(height: 120),
-              _buildBestProjects(),
+                      // My Best Recent Projects
+                      const SizedBox(height: 120),
+                      _buildBestProjects(),
 
-              // Bio and FrameWork
-              const SizedBox(height: 60),
-              _buildBioAndFramework(),
+                      // Bio and FrameWork
+                      const SizedBox(height: 60),
+                      _buildBioAndFramework(),
 
-              // Programming Languages and Technologies
-              const SizedBox(height: 80),
-              _buildProgLangAndTech(),
+                      // Programming Languages and Technologies
+                      const SizedBox(height: 80),
+                      _buildProgLangAndTech(),
 
-              // About Me
-              const SizedBox(height: 80),
-              _buildAboutMe(),
+                      // About Me
+                      const SizedBox(height: 80),
+                      _buildAboutMe(),
 
-              // Bottom white space
-              const SizedBox(height: 60),
-            ],
-          ),
-        ),
-      ),
+                      // Bottom white space
+                      const SizedBox(height: 60),
+                    ],
+                  ),
+                ),
+              ),
+            ),
     );
   }
 
@@ -194,12 +222,13 @@ class _HomePageState extends State<HomePage> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 4),
-                      child: Image.asset(
-                        workedProject.image,
-                        fit: BoxFit.fitWidth,
-                        width: workedProject.appIconSize.width,
-                        height: workedProject.appIconSize.height,
-                      ),
+                      // child: Image.asset(
+                      //   workedProject.image,
+                      //   fit: BoxFit.fitWidth,
+                      //   width: workedProject.appIconSize.width,
+                      //   height: workedProject.appIconSize.height,
+                      // ),
+                      child: allWorkedAppIconImages[projectId],
                     ),
                   ],
                 ),

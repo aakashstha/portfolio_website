@@ -4,7 +4,14 @@ import 'package:get_storage/get_storage.dart';
 import 'package:portfolio_website/model/worked_project_generator.dart';
 
 class HomepageController extends GetxController {
+  var isLoadingAtFirst = true.obs;
   final getXStorage = GetStorage();
+
+  void delayForLoadingImagesAtFirst() {
+    Future.delayed(const Duration(seconds: 3), () {
+      isLoadingAtFirst.value = false;
+    });
+  }
 
   Future<void> initializeGetStorage() async {
     await GetStorage.init();
