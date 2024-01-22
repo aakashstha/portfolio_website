@@ -18,6 +18,7 @@ class IndividualProjectPage extends StatefulWidget {
 class _IndividualProjectPageState extends State<IndividualProjectPage> {
   final HomepageController _homepageController = Get.put(HomepageController());
   late IndividualProject _individualProject;
+  List<Image> allIndividualProjectImages = [];
   late double screenWidth;
 
   @override
@@ -25,6 +26,7 @@ class _IndividualProjectPageState extends State<IndividualProjectPage> {
     int projectId = _homepageController.readIndividualProjectId();
     _individualProject =
         IndividualProjectGenerator.generateWorkedProject()[projectId];
+    _homepageController.isLoadingIndividualProject.value = true;
 
     super.initState();
   }
@@ -134,19 +136,34 @@ class _IndividualProjectPageState extends State<IndividualProjectPage> {
         vertical: width,
         horizontal: screenWidth < 500 ? 5 : 0,
       ),
-      child: Wrap(
-        // Row Spacing
-        spacing: 20,
-        // Column Spacing
-        runSpacing: screenWidth < 500 ? 5 : 20,
-        alignment: WrapAlignment.center,
-        children: [
-          for (var i = 0; i < individualProject.listofScreenshot.length; i++)
-            Image.asset(
-              'assets/images/${individualProject.screenshotFolderName}/${individualProject.listofScreenshot[i]}',
-              height: screenWidth < 500 ? 400 : 600,
-            ),
-        ],
+      child: Obx(
+        () {
+          _homepageController.delayForLoadingIndividualProject(3);
+
+          for (var i = 0; i < individualProject.listofScreenshot.length; i++) {
+            allIndividualProjectImages.add(
+              Image.asset(
+                'assets/images/${individualProject.screenshotFolderName}/${individualProject.listofScreenshot[i]}',
+                height: screenWidth < 500 ? 400 : 600,
+              ),
+            );
+          }
+          return _homepageController.isLoadingIndividualProject.value
+              ? const Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [CircularProgressIndicator()],
+                  ),
+                )
+              : Wrap(
+                  // Row Spacing
+                  spacing: 20,
+                  // Column Spacing
+                  runSpacing: screenWidth < 500 ? 5 : 20,
+                  alignment: WrapAlignment.center,
+                  children: allIndividualProjectImages,
+                );
+        },
       ),
     );
   }

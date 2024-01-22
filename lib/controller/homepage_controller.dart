@@ -5,11 +5,18 @@ import 'package:portfolio_website/model/worked_project_generator.dart';
 
 class HomepageController extends GetxController {
   var isLoadingAtFirst = true.obs;
+  var isLoadingIndividualProject = true.obs;
   final getXStorage = GetStorage();
 
-  void delayForLoadingImagesAtFirst() {
-    Future.delayed(const Duration(seconds: 3), () {
+  void delayForLoadingImagesAtFirst(int durationInSeconds) {
+    Future.delayed(Duration(seconds: durationInSeconds), () {
       isLoadingAtFirst.value = false;
+    });
+  }
+
+  void delayForLoadingIndividualProject(int durationInSeconds) {
+    Future.delayed(Duration(seconds: durationInSeconds), () {
+      isLoadingIndividualProject.value = false;
     });
   }
 

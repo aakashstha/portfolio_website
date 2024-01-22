@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:portfolio_website/constants/url_constants.dart';
 import 'package:portfolio_website/constants/image_constants.dart';
-import 'package:portfolio_website/routes/app_routes.dart';
 import 'package:portfolio_website/widgets/build_svg.dart';
 import 'package:portfolio_website/widgets/custom_text.dart';
 
